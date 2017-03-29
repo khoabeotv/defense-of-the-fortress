@@ -24,12 +24,14 @@ Dotf.configs = {
 };
 
 window.onload = function() {
-    Dotf.game = new Phaser.Game(Dotf.configs.GAME_WIDTH_MAX, Dotf.configs.GAME_HEIGHT_MAX, Phaser.CANVAS, '', {
-        preload: preload,
-        create: create,
-        update: update,
-        render: render
-    }, false, false);
+    Dotf.game = new Phaser.Game(Dotf.configs.GAME_WIDTH_MAX, Dotf.configs.GAME_HEIGHT_MAX, Phaser.CANVAS, '');
+    //State
+    Dotf.game.state.add('boot',bootState);
+    Dotf.game.state.add('load',loadState);
+    Dotf.game.state.add('menu',menuState);
+    Dotf.game.state.add('play',playState);
+    Dotf.game.state.add('win',winState);
+    Dotf.game.state.start('boot');
 };
 
 // preparations before game starts
