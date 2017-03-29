@@ -13,6 +13,8 @@ class PlayerController {
 
         Dotf.game.camera.follow(this.sprite);
         Dotf.game.camera.follow(this.sprite, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+        this.spaceKey = Dotf.game.input.keyboard.addKey(this.configs.slide);
+        this.spaceKey.onDown.add(this.slide, this);
 
         this.gun = new GunController(Dotf.gunGroup, 'flaming_gun_animation', this.sprite);
 
@@ -57,10 +59,16 @@ class PlayerController {
         }
     }
 
+    slide() {
+        // TODO: when power is empty. this object cant slide
+        Dotf.game.physics.arcade.moveToPointer(this.sprite, 20000, Dotf.game.input.activePointer);
+    }
+
     update() {
 
         if (!this.sprite.alive) {
             this.gun.sprite.kill();
+            return;
         }
 
         this.gun.update();
@@ -83,6 +91,10 @@ class PlayerController {
         } else if (Dotf.keyboard.isDown(this.configs.right)) {
             this.sprite.body.velocity.x = this.configs.speed;
         }
+
+        // if (Dotf.keyboard.isPressed(this.configs.slide)){
+        //     console.log('slide');
+        // }
         // Stop animation
         if (this.sprite.body.velocity.x === 0 && this.sprite.body.velocity.y === 0) this.sprite.animations.stop();
     }

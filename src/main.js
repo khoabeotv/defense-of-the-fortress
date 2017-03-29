@@ -107,6 +107,7 @@ const create = () => {
         down: Phaser.Keyboard.S,
         left: Phaser.Keyboard.A,
         right: Phaser.Keyboard.D,
+        slide: Phaser.Keyboard.SPACEBAR,
         speed: Dotf.configs.player.speed
     });
 
